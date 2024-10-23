@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+This is UI component for state-affair site. Earlier i shared server component.
+Follow these instructions -
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Checkout code on local.
+- npm install
+- npm start.
 
-## Available Scripts
+this will start server on port 3000 and make sure we already have server installed on local machine and running as that server would be backend for this ui app.
 
-In the project directory, you can run:
+This App has three routes -
+/create-news This is a form where we can create news with different attributes. Please note there is no validatiuon or check present this time on the UI.
 
-### `npm start`
+/ or /news this will list news articles from the database.. Please note this is just summary and idea is to create another route if user select that card s/he would be taken to detail of the news. But that is not developed this moment and will be implemented soon.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+/fetch-news This is another form where user would enter the topic and once submitted, message would be sent to the backend and it will fetch news for the topic..
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+With this, fetch from remote, get and post endpoints from back end server is integrated here.
 
-### `npm test`
+Things to be done for better User Experience and Completeness -
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- There is no form validation present this moment.
+- There is no Error messaging present this moment. Errors are logged on the browser as console.error
+- Styling is not complete, also mobile and other form factors need to be addressed.
+- Unit test and other tests need to be written. default app creation gives the wiring of test framework but tests need to be written.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Basically when i wrote this app, I wanted to show the flow where UI and backend can be connected with end-to-end. My goal was not to implement perfact solution as it would take some time.

@@ -1,13 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import ListNews from "./components/ListNews";
+import CreateNews from "./components/CreateNews";
+import FetchNews from "./components/FetchNews";
+import ErrorElement from "./components/ErrorElement";
+
+const router = createBrowserRouter([
+  {
+    path: "/create-news",
+    element: <CreateNews />,
+  },
+  {
+    path: "/fetch-news",
+    element: <FetchNews />,
+  },
+  {
+    path: "/news",
+    element: <ListNews />,
+  },
+  {
+    path: "/",
+    element: <ListNews />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
