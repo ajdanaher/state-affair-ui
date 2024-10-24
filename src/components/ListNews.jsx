@@ -48,6 +48,13 @@ const RowFlexDiv = styled.div`
   text-align: center;
 `;
 
+const RowFlexDivContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  height: 2rem;
+`;
+
 export default function ListNews() {
   const [userData, setUserData] = useState([]);
 
@@ -82,8 +89,12 @@ export default function ListNews() {
               <RowFlexDiv>
                 <Link to={data.url}>Source</Link>
               </RowFlexDiv>
-              <RowFlexDiv>
+              {/* <RowFlexDiv className={{ "text-align": "justify" }}> */}
+              <RowFlexDivContent className={{ "text-align": "justify" }}>
                 <p>{`${data.description.substring(0, 100)} ...`}</p>
+              </RowFlexDivContent>
+              <RowFlexDiv>
+                <Link to={`/detail/${data.id}`}>More</Link>
               </RowFlexDiv>
             </Main>
           </StyledSection>
