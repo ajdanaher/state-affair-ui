@@ -19,6 +19,7 @@ const StyledContainer = styled.div`
 
 const StyledSection = styled.section`
   background-color: white;
+  width: 100%;
   height: auto;
   box-shadow: 1px 2.1px 2.1px hsl(0deg 0% 0% / 0.47);
   display: flex;
@@ -83,7 +84,6 @@ export default function NewsDetails() {
           <Topic>{data.topic}</Topic>
           <Date>{moment(data.publishedAt).format("MM-DD-YYYY")}</Date>
         </Header>
-
         <RowDiv>
           <Link to={data.url}>Source</Link>
         </RowDiv>
