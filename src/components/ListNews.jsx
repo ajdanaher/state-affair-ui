@@ -36,6 +36,7 @@ const Header = styled.header`
 const Main = styled.main`
   display: flex;
   flex-direction: column;
+  max-height: 86%;
   width: 100%;
 `;
 
@@ -57,7 +58,6 @@ const RowFlexDivContent = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 0.5rem;
-  height: 2rem;
   overflow: auto;
 `;
 
