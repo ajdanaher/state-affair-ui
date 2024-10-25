@@ -23,7 +23,6 @@ const StyledSection = styled.section`
   box-shadow: 1px 2.1px 2.1px hsl(0deg 0% 0% / 0.47);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 `;
 
 const Header = styled.header`
@@ -40,6 +39,12 @@ const Main = styled.main`
   width: 100%;
 `;
 
+const Footer = styled.footer`
+  height: 7%;
+  text-align: right;
+  padding: 1rem;
+`;
+
 const RowFlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -53,6 +58,7 @@ const RowFlexDivContent = styled.div`
   justify-content: space-between;
   padding: 0 0.5rem;
   height: 2rem;
+  overflow: auto;
 `;
 
 export default function ListNews() {
@@ -89,14 +95,13 @@ export default function ListNews() {
               <RowFlexDiv>
                 <Link to={data.url}>Source</Link>
               </RowFlexDiv>
-              {/* <RowFlexDiv className={{ "text-align": "justify" }}> */}
               <RowFlexDivContent className={{ "text-align": "justify" }}>
                 <p>{`${data.description.substring(0, 100)} ...`}</p>
               </RowFlexDivContent>
-              <RowFlexDiv>
-                <Link to={`/detail/${data.id}`}>More</Link>
-              </RowFlexDiv>
             </Main>
+            <Footer>
+              <Link to={`/details/${data._id}`}>More</Link>
+            </Footer>
           </StyledSection>
         );
       })}

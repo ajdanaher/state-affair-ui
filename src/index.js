@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListNews from "./components/ListNews";
 import CreateNews from "./components/CreateNews";
 import FetchNews from "./components/FetchNews";
+import NewsDetails from "./components/NewsDetails";
 import ErrorElement from "./components/ErrorElement";
 
 const router = createBrowserRouter([
@@ -24,8 +25,8 @@ const router = createBrowserRouter([
     element: <ListNews />,
   },
   {
-    path: "/detail/:id",
-    element: <DetailNews />,
+    path: "/details/:id",
+    element: <NewsDetails />,
   },
   {
     path: "/",
