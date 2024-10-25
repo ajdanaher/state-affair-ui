@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { ColorRing } from 'react-loader-spinner';
+
 
 import { httpFetchNews } from "../utils/http";
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 const ContainerDiv = styled.div`
   height: 100%;
@@ -54,6 +57,7 @@ const StyledSubmit = styled.button`
 `;
 
 export default function FetchNews() {
+  const [ isLoading, setIsLoading ] = useState(false);
   const navigate = useNavigate();
 
   async function handleOnSubmit(event) {
@@ -63,11 +67,15 @@ export default function FetchNews() {
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd.entries());
     try {
-      await httpFetchNews(formData);
+      await httpFetchNews(formData, setLoadingStatus);
       navigate("/news");
     } catch (e) {
       console.error(e);
     }
+  }
+
+  function setLoadingStatus(loadStatus) {
+    setIsLoading(loadStatus);
   }
 
   return (
@@ -80,6 +88,15 @@ export default function FetchNews() {
           </SectionElement>
         </Section>
         <StyledSubmit>Submit</StyledSubmit>
+        {isLoading && <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />}
       </StyledForm>
     </ContainerDiv>
   );

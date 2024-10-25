@@ -18,10 +18,11 @@ export async function httpPost(data) {
   });
 }
 
-export async function httpFetchNews(data) {
+export async function httpFetchNews(data, setLoadStatus) {
   return new Promise(async (resolve, reject) => {
     const path = `http://localhost:8080/v1/news/fetch`;
     try {
+      setLoadStatus(true);
       const response = await fetch(path, {
         method: "POST",
         body: JSON.stringify(data),
@@ -34,6 +35,8 @@ export async function httpFetchNews(data) {
     } catch (e) {
       console.error(e);
       reject(e);
+    } finally {
+      setLoadStatus(false);
     }
   });
 }
