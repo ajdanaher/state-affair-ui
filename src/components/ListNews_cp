@@ -64,15 +64,16 @@ const RowFlexDivContent = styled.div`
 
 export default function ListNews() {
   const [userData, setUserData] = useState([]);
-  const [isLoading, setUseLoading] = useState(true);
+  const [isLoading, setUseLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchRemoteData() {
       try {
-        const data = await httpGet({});
+        const data = await httpGet({}, setUseLoading);
         setUserData(data);
       } catch (e) {
+        console.error(e);
         setError(e);
       } finally {
         setUseLoading(false);
@@ -95,33 +96,35 @@ export default function ListNews() {
         />
       )}
       {error && <p>{error.message}</p>}
-      {userData.map((data) => {
-        return (
-          <StyledSection>
-            <Header>
-              <p>{data.topic}</p>
-            </Header>
-            <Main>
-              <RowFlexDiv>
-                <p>{`${data.title.substring(0, 20)}`}</p>
-              </RowFlexDiv>
-              <RowFlexDiv>
-                {<p>{moment(data.publishedAt).format("MM-DD-YYYY")}</p>}
-                <p>{data.state}</p>
-              </RowFlexDiv>
-              <RowFlexDiv>
-                <Link to={data.url}>Source</Link>
-              </RowFlexDiv>
-              <RowFlexDivContent className={{ "text-align": "justify" }}>
-                <p>{`${data.description.substring(0, 100)} ...`}</p>
-              </RowFlexDivContent>
-            </Main>
-            <Footer>
-              <Link to={`/details/${data._id}`}>More</Link>
-            </Footer>
-          </StyledSection>
-        );
-      })}
+      {!error &&
+        !isLoading &&
+        userData.map((data) => {
+          return (
+            <StyledSection>
+              <Header>
+                <p>{data.topic}</p>
+              </Header>
+              <Main>
+                <RowFlexDiv>
+                  <p>{`${data.title.substring(0, 20)}`}</p>
+                </RowFlexDiv>
+                <RowFlexDiv>
+                  {<p>{moment(data.publishedAt).format("MM-DD-YYYY")}</p>}
+                  <p>{data.state}</p>
+                </RowFlexDiv>
+                <RowFlexDiv>
+                  <Link to={data.url}>Source</Link>
+                </RowFlexDiv>
+                <RowFlexDivContent className={{ "text-align": "justify" }}>
+                  <p>{`${data.description.substring(0, 100)} ...`}</p>
+                </RowFlexDivContent>
+              </Main>
+              <Footer>
+                <Link to={`/details/${data._id}`}>More</Link>
+              </Footer>
+            </StyledSection>
+          );
+        })}
     </StyledContainer>
   );
 }
