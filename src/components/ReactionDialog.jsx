@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef } from "react";
 import styled from "styled-components";
 import Emoji from "./Emoji";
 
@@ -26,44 +26,75 @@ const Title = styled.div`
   margin-right: 3rem;
 `;
 
-//export default function ReactionDialog({ ref }) {
 const ReactionDialog = forwardRef(function ReactionDialog(props, ref) {
   const [emoji, setEmoji] = useState("");
+  const [comments, setUserComments] = useState("");
 
   function setEmojiSelection(value) {
     setEmoji(value);
   }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+
+    const data = {};
+    data.newsId = props.id;
+    data.userComments = comments;
+    if (emoji) data.userReaction = emoji;
+
+    // console.log(data);
+
+    setEmoji("");
+    setUserComments("");
+    ref.current.close();
+  }
+
+  function handleUserComments(event) {
+    setUserComments(event.target.value);
+  }
+
   return (
     <dialog ref={ref}>
-      <Title>
-        <h4>Your Commentes. ..</h4>
-        <p>{emoji}</p>
-      </Title>
-      <textarea rows="4" cols="50"></textarea>
-      <FlexBox>
-        <Emoji symbol="👍" label="Like" setEmojiSelection={setEmojiSelection} />
-        <Emoji
-          symbol="👎"
-          label="Dont like"
-          setEmojiSelection={setEmojiSelection}
-        />
-        <Emoji
-          symbol="👏"
-          label="Nice Done"
-          setEmojiSelection={setEmojiSelection}
-        />
-        <Emoji
-          symbol="❤️"
-          label="Love it"
-          setEmojiSelection={setEmojiSelection}
-        />
-        <Emoji
-          symbol="❌"
-          label="Remove Selection"
-          setEmojiSelection={setEmojiSelection}
-        />
-      </FlexBox>
-      <form method="dialog">
+      <form onSubmit={handleOnSubmit}>
+        <Title>
+          <h4>Your Commentes. ..</h4>
+          <p>{emoji}</p>
+        </Title>
+        <textarea
+          id="usercomments"
+          name="usercoments"
+          onChange={handleUserComments}
+          value={comments}
+          rows="4"
+          cols="50"
+        ></textarea>
+        <FlexBox>
+          <Emoji
+            symbol="👍"
+            label="Like"
+            setEmojiSelection={setEmojiSelection}
+          />
+          <Emoji
+            symbol="👎"
+            label="Dont like"
+            setEmojiSelection={setEmojiSelection}
+          />
+          <Emoji
+            symbol="👏"
+            label="Nice Done"
+            setEmojiSelection={setEmojiSelection}
+          />
+          <Emoji
+            symbol="❤️"
+            label="Love it"
+            setEmojiSelection={setEmojiSelection}
+          />
+          <Emoji
+            symbol="❌"
+            label="Remove Selection"
+            setEmojiSelection={setEmojiSelection}
+          />
+        </FlexBox>
         <StyledSubmit>Close</StyledSubmit>
       </form>
     </dialog>

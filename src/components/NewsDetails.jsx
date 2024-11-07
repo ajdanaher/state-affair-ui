@@ -110,7 +110,7 @@ export default function NewsDetails() {
         <Content>{data.content}</Content>
         {/* <p>{JSON.stringify(data)}</p> */}
       </StyledSection>
-      <ReactionDialog ref={dialog} />
+      <ReactionDialog ref={dialog} id={param.id}/>
       <StyledSubmit onClick={showModal}>Comment</StyledSubmit>
     </StyledContainer>
   );
