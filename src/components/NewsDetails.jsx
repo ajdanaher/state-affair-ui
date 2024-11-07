@@ -5,6 +5,7 @@ import { httpGet } from "../utils/http";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import ReactionDialog from "./ReactionDialog";
+import NewsComments from "./NewsComments";
 
 const StyledContainer = styled.div`
   margin: 5%;
@@ -69,9 +70,11 @@ const StyledSubmit = styled.button`
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   float: right;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function NewsDetails() {
@@ -96,22 +99,25 @@ export default function NewsDetails() {
   }
 
   return (
-    <StyledContainer>
-      <StyledSection>
-        <Header>
-          <Topic>{data.topic}</Topic>
-          <Date>{moment(data.publishedAt).format("MM-DD-YYYY")}</Date>
-        </Header>
-        <RowDiv>
-          <Link to={data.url}>Source</Link>
-        </RowDiv>
-        <Title>"{data.title}"</Title>
-        <Description>{data.description}</Description>
-        <Content>{data.content}</Content>
-        {/* <p>{JSON.stringify(data)}</p> */}
-      </StyledSection>
-      <ReactionDialog ref={dialog} id={param.id}/>
-      <StyledSubmit onClick={showModal}>Comment</StyledSubmit>
-    </StyledContainer>
+    <>
+      <StyledContainer>
+        <StyledSection>
+          <Header>
+            <Topic>{data.topic}</Topic>
+            <Date>{moment(data.publishedAt).format("MM-DD-YYYY")}</Date>
+          </Header>
+          <RowDiv>
+            <Link to={data.url}>Source</Link>
+          </RowDiv>
+          <Title>"{data.title}"</Title>
+          <Description>{data.description}</Description>
+          <Content>{data.content}</Content>
+          {/* <p>{JSON.stringify(data)}</p> */}
+        </StyledSection>
+        <ReactionDialog ref={dialog} id={param.id} />
+        <StyledSubmit onClick={showModal}>Comment</StyledSubmit>
+      </StyledContainer>
+      <NewsComments id={param.id} />
+    </>
   );
 }

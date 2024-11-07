@@ -1,6 +1,8 @@
 import { useState, forwardRef, useRef } from "react";
 import styled from "styled-components";
 import Emoji from "./Emoji";
+import moment from "moment";
+import { httpPostComments } from "../utils/http";
 
 const StyledSubmit = styled.button`
   background-color: #008cba;
@@ -9,10 +11,12 @@ const StyledSubmit = styled.button`
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   float: right;
   margin-top: 0%.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const FlexBox = styled.div`
@@ -38,15 +42,18 @@ const ReactionDialog = forwardRef(function ReactionDialog(props, ref) {
     event.preventDefault();
 
     const data = {};
-    data.newsId = props.id;
-    data.userComments = comments;
-    if (emoji) data.userReaction = emoji;
-
-    // console.log(data);
-
-    setEmoji("");
-    setUserComments("");
-    ref.current.close();
+    data.id = props.id;
+    data.comments = comments;
+    data.reaction = emoji;
+    data.publishedAt = moment.utc().format();
+    try {
+      await httpPostComments(data);
+      setEmoji("");
+      setUserComments("");
+      ref.current.close();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function handleUserComments(event) {

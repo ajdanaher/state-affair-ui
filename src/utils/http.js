@@ -66,3 +66,44 @@ export async function httpGet(obj) {
     }
   });
 }
+
+export async function httpPostComments(data) {
+  return new Promise(async (resolve, reject) => {
+    const path = `http://localhost:8080/v1/comments/${data.id}`;
+    try {
+      const response = await fetch(path, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) throw new Error("Getting error in Remote call");
+      const resData = await response.json();
+      resolve({ message: resData.message });
+    } catch (e) {
+      console.error(e);
+      reject(e);
+    }
+  });
+}
+
+export async function httpGetComments(obj) {
+  return new Promise(async (resolve, reject) => {
+    let path = `http://localhost:8080/v1/comments/${obj.id}`;
+    try {
+      const response = await fetch(path, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) throw new Error("Getting error in Remote call");
+      const resData = await response.json();
+      resolve(resData);
+    } catch (e) {
+      console.error(e);
+      reject(e);
+    }
+  });
+}
