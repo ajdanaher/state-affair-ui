@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { httpGet } from "../utils/http";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import ReactionDialog from "./ReactionDialog";
 
 const StyledContainer = styled.div`
   margin: 5%;
@@ -61,9 +62,22 @@ const Content = styled.div`
   padding: 1rem;
 `;
 
+const StyledSubmit = styled.button`
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+`;
+
 export default function NewsDetails() {
   const param = useParams();
   const [data, setData] = useState({});
+  const dialog = useRef();
 
   useEffect(() => {
     async function fetchRemoteData() {
@@ -76,6 +90,10 @@ export default function NewsDetails() {
     }
     fetchRemoteData();
   }, []);
+
+  function showModal() {
+    dialog.current.showModal();
+  }
 
   return (
     <StyledContainer>
@@ -92,6 +110,8 @@ export default function NewsDetails() {
         <Content>{data.content}</Content>
         {/* <p>{JSON.stringify(data)}</p> */}
       </StyledSection>
+      <ReactionDialog ref={dialog} />
+      <StyledSubmit onClick={showModal}>Comment</StyledSubmit>
     </StyledContainer>
   );
 }
